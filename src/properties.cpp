@@ -2,22 +2,6 @@
 
 namespace kdlcpp {
 
-auto properties::begin() noexcept { 
-  return m_properties_map.begin(); 
-}
-
-auto properties::begin() const noexcept { 
-  return m_properties_map.cbegin(); 
-}
-
-auto properties::end() noexcept { 
-  return m_properties_map.end(); 
-}
-
-auto properties::end() const noexcept { 
-  return m_properties_map.cend(); 
-}
-
 std::size_t properties::size() const noexcept {
   return m_properties_map.size();
 }

@@ -9,7 +9,7 @@ namespace kdlcpp {
 /**
  * In KDL, a node can have Properties. Properties are a set
  * of key-value pairs, or named arguments. Keys are always of
- * kdlcpp::StringType type, while values must be kdlcpp::Value.
+ * kdlcpp::string_type type, while values must be kdlcpp::value.
  * Properties are always relative to a single node.
  */
 class properties {
@@ -18,22 +18,30 @@ public:
   /**
    * Returns an iterator to the beginning of the properties map.
    */
-  [[nodiscard]] auto begin() noexcept;
+  [[nodiscard]] inline auto begin() noexcept {
+    return m_properties_map.begin();
+  }
 
   /**
    * Returns a const iterator to the beginning of the properties map.
    */
-  [[nodiscard]] auto begin() const noexcept;
+  [[nodiscard]] inline auto begin() const noexcept {
+    return m_properties_map.cbegin();
+  }
 
   /**
    * Returns an iterator to the end of the properties map.
    */
-  [[nodiscard]] auto end() noexcept;
+  [[nodiscard]] inline auto end() noexcept {
+    return m_properties_map.end();
+  }
 
   /**
    * Returns a const iterator to the end of the properties map.
    */
-  [[nodiscard]] auto end() const noexcept;
+  [[nodiscard]] inline auto end() const noexcept {
+    return m_properties_map.cend();
+  }
 
   /**
    * Returns the number of properties currently stored.
@@ -50,7 +58,7 @@ public:
   [[nodiscard]] bool contains(const string_type& key) const noexcept;
 
   /**
-   * Gets the kdlcpp::Value associated to a certain key.
+   * Gets the kdlcpp::value associated to a certain key.
    * @param key The key of the property.
    * @return A kdlcpp:Value instance.
    */

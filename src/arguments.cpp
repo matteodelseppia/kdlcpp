@@ -2,22 +2,6 @@
 
 namespace kdlcpp {
 
-auto arguments::begin() noexcept { 
-  return m_arguments_list.begin(); 
-}
-
-auto arguments::begin() const noexcept { 
-  return m_arguments_list.cbegin(); 
-}
-
-auto arguments::end() noexcept { 
-  return m_arguments_list.end(); 
-}
-
-auto arguments::end() const noexcept { 
-  return m_arguments_list.cend(); 
-}
-
 std::size_t arguments::size() const noexcept {
   return m_arguments_list.size();
 }

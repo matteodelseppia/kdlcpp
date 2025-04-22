@@ -28,7 +28,7 @@ public:
 
   /**
    * Gets the name of the node.
-   * @return A StringType representing the node's name.
+   * @return A string representing the node's name.
    */
   [[nodiscard]] string_type get_name() const noexcept;
 

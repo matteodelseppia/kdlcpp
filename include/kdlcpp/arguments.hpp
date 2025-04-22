@@ -7,10 +7,10 @@
 namespace kdlcpp {
 
 /**
- * In KDL, a node can have Arguments. Arguments are a list
+ * In KDL, a node can have arguments. Arguments are a list
  * of unnamed values passed in a specific order. Each argument
- * is a kdlcpp::Value and the order in which they are stored
- * is significant. Arguments are always relative to a single node.
+ * is a kdlcpp::value and the order in which they are stored
+ * is significant. arguments are always relative to a single node.
  */
 class arguments {
 public:
@@ -18,22 +18,30 @@ public:
   /**
    * Returns an iterator to the beginning of the arguments list.
    */
-  [[nodiscard]] auto begin() noexcept;
+  [[nodiscard]] inline auto begin() noexcept {
+    return m_arguments_list.begin();
+  }
 
   /**
    * Returns a const iterator to the beginning of the arguments list.
    */
-  [[nodiscard]] auto begin() const noexcept;
+  [[nodiscard]] inline auto begin() const noexcept {
+    return m_arguments_list.cbegin();
+  }
 
   /**
    * Returns an iterator to the end of the arguments list.
    */
-  [[nodiscard]] auto end() noexcept;
+  [[nodiscard]] inline auto end() noexcept {
+    return m_arguments_list.end();
+  }
 
   /**
    * Returns a const iterator to the end of the arguments list.
    */
-  [[nodiscard]] auto end() const noexcept;
+  [[nodiscard]] inline auto end() const noexcept {
+    return m_arguments_list.cend();
+  }
 
   /**
    * Returns the number of arguments currently stored.
@@ -42,7 +50,7 @@ public:
   [[nodiscard]] std::size_t size() const noexcept;
 
   /**
-   * Gets the kdlcpp::Value at a specific index.
+   * Gets the kdlcpp::value at a specific index.
    * @param index The index of the argument.
    * @return A kdlcpp::Value instance if it exists.
    */
