@@ -2,24 +2,65 @@
 
 namespace kdlcpp {
 
-template <typename T>
+/**
+ * @brief A generic stream wrapper that abstracts away
+ *        the interface of standard stream types (e.g., std::stringstream, std::fstream).
+ * 
+ * This class relies on the stream insertion operator (<<) 
+ * to write data to the underlying stream object.
+ * 
+ * @tparam T The type of the stream being wrapped.
+ */
+template <typename stream_type>
 class stream {
 public:
-  stream(T& stream_impl) : m_stream_impl(stream_impl) {}
 
-  template <typename U>
-  void write(const U& val) {
-    m_stream_impl << val;
+  /**
+   * @brief Constructs a stream wrapper by taking ownership
+   *        of the provided stream object.
+   * 
+   * @param stream_instance The stream object to wrap.
+   */
+  explicit stream(stream_type&& stream_instance) noexcept
+    : m_internal_stream(std::move(stream_instance)) {}
+
+  /**
+   * @brief Provides access to the underlying stream object.
+   * 
+   * @return A const reference to the wrapped stream.
+   */
+  [[nodiscard]] const stream_type& get() const noexcept {
+    return m_internal_stream;
+  }
+
+  /**
+   * @brief Writes a value to the stream using the << operator.
+   * 
+   * @tparam value_type The type of the value being written.
+   * @param val The value to write.
+   */
+  template <typename value_type>
+  void write(const value_type& val) {
+    m_internal_stream << val;
   }
 
 private:
-  T& m_stream_impl;
+  stream_type m_internal_stream;  ///< The wrapped stream object.
 };
 
-template <typename T, typename stream_t>
-stream<stream_t>& operator<<(stream<stream_t>& str, const T& val) {
-  str.write(val);
-  return str;
+/**
+ * @brief Overloads the << operator to allow writing to a kdlcpp::stream.
+ * 
+ * @tparam stream_type The type of the underlying stream.
+ * @tparam value_type The type of the value to write.
+ * @param stream_wrapper The stream wrapper instance.
+ * @param val The value to write to the stream.
+ * @return A reference to the stream wrapper.
+ */
+template <typename stream_type, typename value_type>
+stream<stream_type>& operator<<(stream<stream_type>& stream_wrapper, const value_type& val) {
+  stream_wrapper.write(val);
+  return stream_wrapper;
 }
 
-}
+} // namespace kdlcpp

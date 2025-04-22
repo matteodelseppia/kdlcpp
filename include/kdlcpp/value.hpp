@@ -13,15 +13,15 @@ namespace kdlcpp {
  * A value instance can be used either as a node argument or as a node property value.
  * The supported data types are:
  * 
- * - Null        (null equivalent)
+ * - null        (null equivalent)
  * 
- * - Boolean     (true/false)
+ * - boolean     (true/false)
  * 
- * - Integral    (64-bit signed integer)
+ * - integral    (64-bit signed integer)
  * 
- * - Decimal     (double-precision floating point)
+ * - decimal     (double-precision floating point)
  * 
- * - String      (UTF-8 encoded text)
+ * - string      (UTF-8 encoded text)
  */
 class value {
 public:
