@@ -41,6 +41,8 @@ set(KDLCPP_HEADERS
   ${KDLCPP_INCLUDE_DIR}/${PROJECT_NAME}/document.hpp
   ${KDLCPP_INCLUDE_DIR}/${PROJECT_NAME}/common.hpp
   ${KDLCPP_INCLUDE_DIR}/${PROJECT_NAME}/stream.hpp
+  ${KDLCPP_INCLUDE_DIR}/${PROJECT_NAME}/detail/tokens.hpp
+  ${KDLCPP_INCLUDE_DIR}/${PROJECT_NAME}/detail/serialize.hpp
 )
 
 set(KDLCPP_SOURCES
