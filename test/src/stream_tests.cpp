@@ -13,7 +13,7 @@ TEST(stream, write_string_to_stream) {
   stream<std::stringstream> myStream{std::move(ss)};
   const std::string testStr = "Hello, world!";
 
-  myStream.write(testStr);
+  myStream << testStr;
   EXPECT_EQ(myStream.get().str(), testStr);
 }
 
@@ -25,7 +25,7 @@ TEST(stream, write_integer_to_stream) {
   stream<std::stringstream> myStream{std::move(ss)};
   const int testInt = 42;
 
-  myStream.write(testInt);
+  myStream << testInt;
   EXPECT_EQ(myStream.get().str(), "42");
 }
 
@@ -47,8 +47,24 @@ TEST(stream, get_returns_const_reference) {
   std::stringstream ss;
   stream<std::stringstream> myStream{std::move(ss)};
 
-  myStream.write("const test");
+  myStream << "const test";
   const auto& internal = myStream.get();
 
   EXPECT_EQ(internal.str(), "const test");
+}
+
+/**
+ * Verifies that writing and reading the same value from the stream is possible.
+ */
+TEST(stream, write_then_read_same_value) {
+  std::stringstream ss;
+  stream<std::stringstream> myStream{std::move(ss)};
+
+  const std::string writeString = "to_be_written_and_read_again";
+  myStream << writeString;
+  
+  std::string readString;
+  myStream >> readString;
+
+  EXPECT_EQ(writeString, readString);
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 namespace kdlcpp {
 
 /**
@@ -44,6 +46,17 @@ public:
     m_internal_stream << val;
   }
 
+  /**
+   * @brief Reads a value from the stream using the >> operator.
+   * 
+   * @tparam value_type The type of the value being read.
+   * @param val The value to read.
+   */
+  template <typename value_type>
+  void read(value_type& val) {
+    m_internal_stream >> val;
+  }
+
 private:
   stream_type m_internal_stream;  ///< The wrapped stream object.
 };
@@ -60,6 +73,21 @@ private:
 template <typename stream_type, typename value_type>
 stream<stream_type>& operator<<(stream<stream_type>& stream_wrapper, const value_type& val) {
   stream_wrapper.write(val);
+  return stream_wrapper;
+}
+
+/**
+ * @brief Overloads the >> operator to allow reading from a kdlcpp::stream.
+ * 
+ * @tparam stream_type The type of the underlying stream.
+ * @tparam value_type The type of the value to read.
+ * @param stream_wrapper The stream wrapper instance.
+ * @param val The value to read from the stream.
+ * @return A reference to the stream wrapper.
+ */
+template <typename stream_type, typename value_type>
+stream<stream_type>& operator>>(stream<stream_type>& stream_wrapper, value_type& val) {
+  stream_wrapper.read(val);
   return stream_wrapper;
 }
 
